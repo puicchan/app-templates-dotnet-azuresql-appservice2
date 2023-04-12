@@ -13,6 +13,8 @@ on:
 env:
   AZ_ENVIRONMENT_NAME: ${{ secrets.AZURE_ENVIRONMENT_NAME }}
   AZ_LOCATION: ${{ secrets.AZURE_LOCATION }}
+  AZ_APP_NAME: ${{ secrets.AZURE_ENVIRONMENT_NAME }}-app
+  AZ_API_NAME: ${{ secrets.AZURE_ENVIRONMENT_NAME }}-api
   AZ_SQL_SERVER_PASSWORD: ${{ secrets.AZURE_SQL_PASSWORD }}
   AZ_APP_PASSWORD: ${{secrets.AZURE_APP_PASSWORD}}
 
@@ -38,5 +40,5 @@ jobs:
         template: infra/main.bicep
         deploymentMode: Incremental
         deploymentName: 'gh-actions'
-        parameters: environmentName=${{ env.AZ_ENVIRONMENT_NAME }} location=${{ env.AZ_LOCATION }} sqlAdminPassword=${{ env.AZ_SQL_SERVER_PASSWORD }} appUserPassword=${{ env.AZ_APP_PASSWORD }}
+        parameters: environmentName=${{ env.AZ_ENVIRONMENT_NAME }} location=${{ env.AZ_LOCATION }} apiServiceName=${{ env.AZ_API_NAME }} webServiceName=${{ env.AZ_APP_NAME }} sqlAdminPassword=${{ env.AZ_SQL_SERVER_PASSWORD }} appUserPassword=${{ env.AZ_APP_PASSWORD }}
         failOnStdErr: false
